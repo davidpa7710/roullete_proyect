@@ -15,12 +15,12 @@ export default defineConfig({
         theme_color: '#42a5f5',
         icons: [
           {
-            src: 'icon-192x192.png',
+            src: 'roullete_proyect/public/logo.svg',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'icon-512x512.png',
+            src: 'roullete_proyect/public/logo (1).svg',
             sizes: '512x512',
             type: 'image/png'
           }
