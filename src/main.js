@@ -73,3 +73,46 @@ btnBuscar.addEventListener('click', () => {
 
 cargarDatos();
 
+
+function findLowestPrice(products, discounts) {
+    let total = 0;
+
+    for (let i = 0; i < products.length; i++) {
+        let product = products[i];
+        let originalPrice = parseInt(product[0]);
+        let lowestPrice = originalPrice;
+
+        for (let j = 1; j < product.length; j++) { // Asumiendo product[0] es el precio, tags empiezan en product[1]
+            let tag = product[j];
+
+            if (tag === "EMPTY") {
+                continue;
+            }
+
+            for (let k = 0; k < discounts.length; k++) {
+                let [discountTag, discountType, discountValue] = discounts[k];
+
+                if (discountTag === tag) {
+                    let currentDiscountPrice;
+
+                    if (discountType === "0") { // Descuento porcentual
+                        currentDiscountPrice = Math.trunc(originalPrice - originalPrice * (parseInt(discountValue) / 100));
+                    } else if (discountType === "1") { // Descuento de valor fijo
+                        currentDiscountPrice = Math.trunc(originalPrice - parseInt(discountValue));
+                    } else if (discountType === "2") { // Precio fijo establecido por el descuento
+                        currentDiscountPrice = Math.trunc(parseInt(discountValue));
+                    }
+
+                    if (currentDiscountPrice < lowestPrice) {
+                        lowestPrice = currentDiscountPrice;
+                    }
+                }
+            }
+        }
+        total += lowestPrice;
+    }
+
+    return total;
+}
+
+
